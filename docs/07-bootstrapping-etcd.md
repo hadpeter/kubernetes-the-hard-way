@@ -40,7 +40,14 @@ Extract and install the `etcd` server and the `etcdctl` command line utility:
 {
   sudo mkdir -p /etc/etcd /var/lib/etcd
   sudo chmod 700 /var/lib/etcd
-  sudo cp ca.pem kubernetes-key.pem kubernetes.pem /etc/etcd/
+  sudo cp kubernetes-key.pem kubernetes.pem /etc/etcd/
+  sudo cp ca.pem /var/lib/kubernetes/pki/
+  sudo mv /var/lib/kubernetes/pki/ca.pem /var/lib/kubernetes/pki/ca.crt
+  sudo chown root:root /etc/etcd/*
+  sudo chmod 600 /etc/etcd/*
+  sudo chown root:root /var/lib/kubernetes/pki/*
+  sudo chmod 600 /var/lib/kubernetes/pki/*
+  sudo ln -s /var/lib/kubernetes/pki/ca.crt /etc/etcd/ca.crt
 }
 ```
 
